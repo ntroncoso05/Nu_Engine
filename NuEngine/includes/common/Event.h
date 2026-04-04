@@ -50,7 +50,7 @@ namespace Nu
             listeners.erase(std::remove_if(listeners.begin(),
                 listeners.end(), [&](auto& listener)
                 {
-                    return (listeners->ID == listnrid);
+                    return (listener->ID == listnrid);
                 }),
                 listeners.end());
         }
@@ -121,12 +121,10 @@ namespace Nu
             {
                 return CastRegistry<Event>(it->second);
             }
-
             auto registry = new EventRegistry<Event>();
             m_Registry[TypeID<Event>()] = registry;
             return registry;
         }
-
     private:
         std::unordered_map<uint32_t, void*> m_Registry;
         std::queue<std::function<void()>> m_Tasks;

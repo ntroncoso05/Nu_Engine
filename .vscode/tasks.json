@@ -5,40 +5,53 @@
         {
             "type": "shell",
             "label": "Nu-Debug",
-            "problemMatcher":["$gcc"],
-            "options": {"cwd": "${workspaceFolder}"},
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-
-            "windows":{
-                "args": ["Debug"],
+            "windows": {
+                "args": [
+                    "Debug"
+                ],
                 "command": "${workspaceFolder}/NuWin.bat"
             },
-
-            "linux":{
+            "linux": {
                 "sudo": true,
-                "args": ["Debug"],
+                "args": [
+                    "Debug"
+                ],
                 "command": "${workspaceFolder}/NuLinux.sh"
             }
         },
-
         {
             "type": "shell",
             "label": "Nu-Release",
-            "problemMatcher":["$gcc"],
-            "group": { "kind": "build" },
-            "options": {"cwd": "${workspaceFolder}"},
-
-            "windows":{
-                "args": ["Release"],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build"
+            },
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "windows": {
+                "args": [
+                    "Release"
+                ],
                 "command": "${workspaceFolder}/NuWin.bat"
             },
-
-            "linux":{
+            "linux": {
                 "sudo": true,
-                "args": ["Release"],
+                "args": [
+                    "Release"
+                ],
                 "command": "${workspaceFolder}/NuLinus.sh"
             }
         }

@@ -16,9 +16,9 @@ namespace Nu
 
             glfwWindowHint(GLFW_OPENGL_CORE_PROFILE, GLFW_TRUE);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // 4??
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-            auto display =glfwGetVideoMode(glfwGetPrimaryMonitor());
+            auto display = glfwGetVideoMode(glfwGetPrimaryMonitor());
             glfwWindowHint(GLFW_REFRESH_RATE, display->refreshRate);
             glfwWindowHint(GLFW_GREEN_BITS, display->greenBits);
             glfwWindowHint(GLFW_BLUE_BITS, display->blueBits);
@@ -34,7 +34,7 @@ namespace Nu
                 exit(EXIT_FAILURE);
             }
 
-            // set user data
+            // set window user data
             glfwSetWindowUserPointer(m_Handle, this);
 
             // binding Callbacks
