@@ -22,13 +22,16 @@ namespace Nu
         glm::vec3 Position = glm::vec3(0.0f);
         glm::vec3 Normal = glm::vec3(0.0f);
         glm::vec2 UVs = glm::vec2(0.0f);
+
+		glm::vec3 Tangent = glm::vec3(0.0f);   
+		glm::vec3 Bitangent = glm::vec3(0.0f); 
     };
 
     // mesh data
     template<typename Vertex>
     struct MeshData
     {
-        std::vector<Vertex> Vertices;
         std::vector<uint32_t> Indices;
+        std::vector<Vertex> Vertices;
     };    
 }

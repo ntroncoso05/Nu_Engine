@@ -72,6 +72,10 @@ namespace Nu
                 // texcoords
                 vertex.UVs.x = ai_mesh->mTextureCoords[0][i].x;
                 vertex.UVs.y = ai_mesh->mTextureCoords[0][i].y;
+
+				// bi-tangent
+				vertex.Bitangent = AssimpToVec3(ai_mesh->mBitangents[i]);
+				vertex.Tangent = AssimpToVec3(ai_mesh->mTangents[i]);
                 // push to array
                 data.Vertices.push_back(vertex);
             }
@@ -86,8 +90,7 @@ namespace Nu
             }
 
             // create new mesh instance
-            auto mesh = std::make_unique<ShadedMesh>(data);
-            m_Meshes.push_back(std::move(mesh));
+			m_Meshes.push_back(std::make_unique<ShadedMesh>(data));
         }
     private:
         std::vector<Mesh3D> m_Meshes;

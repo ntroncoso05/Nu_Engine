@@ -6,6 +6,7 @@
                 "C:/Users/ntron/.conan/data/glm/cci.20230113/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",
                 "C:/Users/ntron/.conan/data/spdlog/1.12.0/_/_/package/7a4b7dbecf529c983055e2bf9c7700819db975cc/include",    // optional
                 "C:/Users/ntron/.conan/data/assimp/5.2.2/_/_/package/04fcb331da2a765606f2d5ffb7309933bf55c509/include",
+                "C:/Users/ntron/.conan/data/stb/cci.20240531/_/_/package/9d3d9aac798392dbe5b8ddad56d332bc432631ac/include",
                 "C:/Users/ntron/.conan/data/fmt/10.2.1/_/_/package/2c52a23dc25833dd4323e8144302393f0061b96b/include", 
                 "C:/Users/ntron/.conan/data/entt/3.12.2/_/_/package/5ab84d6acfe1f23c4fae0ab88f26e3a396351ac9/include",      // optional
                 "C:/Users/ntron/.conan/data/glfw/3.4/_/_/package/87788707645a6a7a0bda278a5f55360eeefe8ff3/include",

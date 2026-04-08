@@ -1,7 +1,7 @@
 #pragma once
 #include "buffers/Frame.h"
-#include "shaders/PBR.h"
 #include "shaders/Final.h"
+#include "shaders/PBR.h"
 
 namespace Nu
 {
@@ -17,20 +17,49 @@ namespace Nu
             }
             glewExperimental = GL_TRUE;
             
-            m_Pbr = std::make_unique<PbrShader>("Resources/shaders/pbr.glsl");
-            m_Final = std::make_unique<FinalShader>("Resources/shaders/final.glsl");            
+            m_Final = std::make_unique<FinalShader>("Resources/shaders/final.glsl");
+            m_Pbr = std::make_unique<PbrShader>("Resources/shaders/pbr.glsl");            
             m_Frame = std::make_unique<FrameBuffer>(width, height);
             glCheckError();
         }
 
-        NU_INLINE void Draw(Model3D& model, Transform3D& transform)
+        NU_INLINE void SetDirectLight(DirectLight& light, Transform3D& transform, uint32_t index) 
         {
-            m_Pbr->Draw(model, transform);
+            m_Pbr->SetDirectLight(light, transform, index);
         }
 
-        NU_INLINE void Draw(Mesh3D& mesh, Transform3D& transform)
+        NU_INLINE void SetPointLight(PointLight& light, Transform3D& transform, uint32_t index) 
         {
-            m_Pbr->Draw(mesh, transform);
+            m_Pbr->SetPointLight(light, transform, index);
+        }
+
+        NU_INLINE void SetSpotLight(SpotLight& light, Transform3D& transform, uint32_t index) 
+        {
+            m_Pbr->SetSpotLight(light, transform, index);
+        }
+
+        // --
+
+        NU_INLINE void SetDirectLightCount(int32_t count)
+        {
+            m_Pbr->SetDirectLightCount(count);
+        }
+
+        NU_INLINE void SetPointLightCount(int32_t count)
+        {
+            m_Pbr->SetPointLightCount(count);
+        }
+
+        NU_INLINE void SetSpotLightCount(int32_t count)
+        {
+            m_Pbr->SetSpotLightCount(count);
+        }
+       
+        // --
+
+        NU_INLINE void Draw(Model3D& model, PbrMaterial& material, Transform3D& transform)
+        {
+            m_Pbr->Draw(model, material, transform);
         }
 
         NU_INLINE void SetCamera(Camera3D& camera, Transform3D& transform)
@@ -68,7 +97,7 @@ namespace Nu
         }
     private:
         std::unique_ptr<FrameBuffer> m_Frame;
-        std::unique_ptr<PbrShader> m_Pbr;
         std::unique_ptr<FinalShader> m_Final;
+        std::unique_ptr<PbrShader> m_Pbr;
     };
 }

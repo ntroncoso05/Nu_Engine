@@ -1,9 +1,58 @@
 #pragma once
 #include "../models/Model.h"
+#include "../textures/Texture.h"
 
 namespace Nu
 {
-    // Transform
+    // pbr material
+    struct PbrMaterial 
+    {
+        NU_INLINE PbrMaterial(const PbrMaterial&) = default;
+        NU_INLINE PbrMaterial() = default;
+
+        glm::vec3 Albedo = glm::vec3(1.0f);
+        float Roughness = 0.4f;
+        float Metallic = 0.5f;
+
+        Texture RoughnessMap;
+        Texture MetallicMap;
+        Texture NormalMap;
+        Texture AlbedoMap;
+    };
+
+    // point light
+    struct PointLight 
+    {
+        NU_INLINE PointLight(const PointLight&) = default;
+        NU_INLINE PointLight() = default; 
+        
+        glm::vec3 Radiance = glm::vec3(1.0f);
+        float Intensity = 10.0f;
+    };
+
+    // point light
+    struct SpotLight 
+    {
+        NU_INLINE SpotLight(const SpotLight&) = default;
+        NU_INLINE SpotLight() = default; 
+        
+        glm::vec3 Radiance = glm::vec3(1.0f);
+        float Intensity = 3.5f;
+		float FallOff = 60.5f;
+        float CutOff = 20.0f;
+    };
+
+    // directional light
+    struct DirectLight 
+    {
+        NU_INLINE DirectLight(const DirectLight&) = default;
+        NU_INLINE DirectLight() = default; 
+        
+        glm::vec3 Radiance = glm::vec3(1.0f);
+        float Intensity = 10.0f;
+    };
+
+    // transform
     struct Transform3D
     {
         NU_INLINE Transform3D(const Transform3D&) = default;

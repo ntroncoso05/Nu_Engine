@@ -55,10 +55,18 @@ namespace Nu
             glfwSwapInterval(1);
         }
 
-        NU_INLINE ~AppWindow()
+        NU_INLINE bool IsMouse(int32_t button)
         {
-            glfwDestroyWindow(m_Handle);
-            glfwTerminate();
+            if(button >= 0 && button <= GLFW_MOUSE_BUTTON_LAST)
+                return m_Inputs.Mouse.test(button);
+            return false;
+        }
+
+        NU_INLINE bool IsKey(int32_t key)
+        {
+            if(key >= 0 && key <= GLFW_KEY_LAST)
+                return m_Inputs.Keys.test(key);
+            return false;
         }
 
         NU_INLINE GLFWwindow* Handle()
@@ -74,18 +82,10 @@ namespace Nu
             return (!glfwWindowShouldClose(m_Handle));
         }
 
-        NU_INLINE bool IsKey(int32_t key)
+        NU_INLINE ~AppWindow()
         {
-            if(key >=0 && key <= GLFW_KEY_LAST)
-                return m_Inputs.Keys.test(key);
-            return false;
-        }
-
-        NU_INLINE bool IsMouse(int32_t button)
-        {
-            if(button >=0 && button <= GLFW_MOUSE_BUTTON_LAST)
-                return m_Inputs.Mouse.test(button);
-            return false;
+            glfwDestroyWindow(m_Handle);
+            glfwTerminate();
         }
     private:
         NU_INLINE static void OnKey(GLFWwindow* window, int32_t key, int32_t, int32_t action, int32_t)
@@ -187,14 +187,14 @@ namespace Nu
             NU_ERROR("[GLFW]: [{}] {}", code, msg);
         }
 
-        NU_INLINE static void OnClose(GLFWwindow* window)
-        {
-            GetUserData(window)->m_Dispatcher->PostEvent<WindowCloseEvent>();
-        }
-
         NU_INLINE static AppWindow* GetUserData(GLFWwindow* window)
         {
             return static_cast<AppWindow*>(glfwGetWindowUserPointer(window));
+        }
+
+        NU_INLINE static void OnClose(GLFWwindow* window)
+        {
+            GetUserData(window)->m_Dispatcher->PostEvent<WindowCloseEvent>();
         }
 
     private:

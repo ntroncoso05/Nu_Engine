@@ -9,6 +9,32 @@ namespace Nu
     using EntityRegistry = entt::registry;
     constexpr EntityID NENTT = entt::null; // null entity
 
+    // ++
+    
+    // direct light component
+    struct DirectLightComponent 
+    {
+        NU_INLINE DirectLightComponent(const DirectLightComponent&) = default;
+        NU_INLINE DirectLightComponent() = default; 
+        DirectLight Light;
+    };
+
+    // point light component
+    struct PointLightComponent 
+    {
+        NU_INLINE PointLightComponent(const PointLightComponent&) = default;
+        NU_INLINE PointLightComponent() = default; 
+        PointLight Light;
+    };
+
+    // point light component
+    struct SpotLightComponent 
+    {
+        NU_INLINE SpotLightComponent(const SpotLightComponent&) = default;
+        NU_INLINE SpotLightComponent() = default; 
+        SpotLight Light;
+    };
+
     // Transform Component
     struct TransformComponent
     {
@@ -38,7 +64,7 @@ namespace Nu
     { 
         NU_INLINE ModelComponent(const ModelComponent&) = default;
         NU_INLINE ModelComponent() = default; 
-        //Material3D Material; 
+        PbrMaterial Material; 
         Model3D Model; 
     };
 
@@ -47,6 +73,7 @@ namespace Nu
     {
         NU_INLINE MeshComponent(const MeshComponent&) = default;
         NU_INLINE MeshComponent() = default;
+        PbrMaterial Material;
         Mesh3D Mesh;
     };
 

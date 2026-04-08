@@ -20,7 +20,7 @@ namespace Nu
 
         NU_INLINE ~AppContext()
         {
-            for(auto& layer : Layers)
+            for(auto layer : Layers)
             {
                 NU_DELETE(layer);
             }

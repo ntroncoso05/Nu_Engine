@@ -33,6 +33,30 @@ namespace Nu
             glCheckError();
         }
 
+        NU_INLINE void Resize(int32_t width, int32_t height)
+        {
+            // update size
+            m_Width = width;
+            m_Height = height;
+
+            // Resize color attachment
+            glBindTexture(GL_TEXTURE_2D, m_Color);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Width, m_Height, 0, GL_RGBA, GL_FLOAT, NULL);
+            
+            // Resize Depth Attachment
+            glBindRenderbuffer(GL_RENDERBUFFER, m_Render);
+            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, m_Width, m_Height);
+            
+            glBindRenderbuffer(GL_RENDERBUFFER, 0);
+            glBindTexture(GL_TEXTURE_2D, 0);
+            glCheckError();
+        }
+
+        NU_INLINE uint32_t GetTexture()
+        {
+            return m_Color;
+        }
+
         NU_INLINE ~FrameBuffer()
         {
             glDeleteTextures(1, &m_Color);
@@ -44,29 +68,6 @@ namespace Nu
         NU_INLINE float Ratio()
         {
             return (float)m_Width / (float)m_Height;
-        }
-
-        NU_INLINE void Resize(int32_t width, int32_t height)
-        {
-            // update size
-            m_Width = width;
-            m_Height = height;
-
-            // Resize color attachment
-            glBindTexture(GL_TEXTURE_2D, m_Color);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Width, m_Height, 0, GL_RGBA, GL_FLOAT, NULL);
-            
-            // Resize Depth attachment
-            glBindRenderbuffer(GL_RENDERBUFFER, m_Render);
-            glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, m_Width, m_Height);
-            glBindRenderbuffer(GL_RENDERBUFFER, 0);
-            glBindTexture(GL_TEXTURE_2D, 0);
-            glCheckError();
-        }
-
-        NU_INLINE uint32_t GetTexture()
-        {
-            return m_Color;
         }
 
         NU_INLINE void Begin()
