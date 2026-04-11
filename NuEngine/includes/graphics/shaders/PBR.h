@@ -43,6 +43,8 @@ namespace Nu
             u_Model = glGetUniformLocation(m_ShaderID, "u_model");
             u_View = glGetUniformLocation(m_ShaderID, "u_view");
             u_Proj = glGetUniformLocation(m_ShaderID, "u_proj");
+
+            u_HasJoints = glGetUniformLocation(m_ShaderID, "u_hasJoints");
             glCheckError();
         }
 
@@ -111,6 +113,8 @@ namespace Nu
         {
             //glBindTexture(GL_TEXTURE_2D, 0); // Why works here? or (increasing unit by 1 and the activetexture and uniform in SetEnvMaps)
             glUniformMatrix4fv(u_Model, 1, GL_FALSE, glm::value_ptr(transform.Matrix())); glCheckError();
+
+            glUniform1i(u_HasJoints, model->HasJoint());
             glUniform3fv(u_Emissive, 1, &material.Emissive.x);
             glUniform3fv(u_Albedo, 1, &material.Albedo.x); glCheckError();
             glUniform1f(u_Roughness, material.Roughness); glCheckError();
@@ -187,6 +191,17 @@ namespace Nu
             glUniform1i(u_DepthMap, 4);
         }
 
+        NU_INLINE void SetJoints(std::vector<glm::mat4>& transforms) 
+        {
+            for (size_t i = 0; i < transforms.size() && i < 100; ++i) 
+            {
+                std::string uniform = "u_joints[" + std::to_string(i) + "]";
+                uint32_t u_joint = glGetUniformLocation(m_ShaderID, uniform.c_str());
+                glUniformMatrix4fv(u_joint, 1, GL_FALSE, glm::value_ptr(transforms[i]));
+            }
+            //glUniform1i(u_HasJoints, !transforms.empty()); 
+        }
+
         NU_INLINE void SetDirectLightCount(int32_t count)
         {
             glUniform1i(u_NbrDirectLight, count);
@@ -202,6 +217,8 @@ namespace Nu
             glUniform1i(u_NbrSpotLight, count);
         }
     private:
+        uint32_t u_HasJoints = 0u;
+        
         uint32_t u_NbrDirectLight = 0u;
         uint32_t u_NbrPointLight = 0u;
         uint32_t u_NbrSpotLight = 0u;

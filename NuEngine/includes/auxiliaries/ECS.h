@@ -76,6 +76,14 @@ namespace Nu
         Model3D Model; 
     };
 
+    // model animator
+    struct AnimatorComponent 
+    { 
+        NU_INLINE AnimatorComponent(const AnimatorComponent&) = default;
+        NU_INLINE AnimatorComponent() = default; 
+        Animator3D Animator;
+    };
+
     // Mesh Component
     struct MeshComponent
     {

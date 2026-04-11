@@ -8,8 +8,8 @@ namespace Nu
         NU_INLINE Application()
         {
             // initialize application context
-            m_LayerID = TypeID<Application>();
             m_Context = new AppContext();
+            m_LayerID = TypeID<Application>();
 
             // attach window resize event callback
             AttachCallback<WindowResizeEvent>([this](auto e)
@@ -26,17 +26,17 @@ namespace Nu
 
         NU_INLINE void RunContext()
         {
-            // load environment map
-            auto skymap = std::make_shared<Texture2D>("Resources/textures/hdrs/Sky.hdr", true, true);
-
             // load textures
+            auto skymap = std::make_shared<Texture2D>("Resources/textures/hdrs/Sky.hdr", true, true);
+            
             //auto roughness = std::make_shared<Texture2D>("Resources/textures/marble/Roughness.png");
             //auto albedo = std::make_shared<Texture2D>("Resources/textures/marble/Albedo.png");
             //auto normal = std::make_shared<Texture2D>("Resources/textures/marble/Normal.png");
 
             // load models
-            auto sphereModel = std::make_shared<Model>("Resources/models/sphere.fbx");
-            auto cubeModel = std::make_shared<Model>("Resources/models/cube.fbx");
+            auto walking = std::make_shared<SkeletalModel>("Resources/models/Walking.fbx");
+            //auto sphereModel = std::make_shared<Model>("Resources/models/sphere.fbx");
+            //auto cubeModel = std::make_shared<Model>("Resources/models/cube.fbx");
             
             // create scene camera
             auto camera = CreateEntt<Entity>();
@@ -50,11 +50,19 @@ namespace Nu
 
              // create point light 1      
             auto slight = CreateEntt<Entity>();
-            slight.Attach<DirectLightComponent>().Light.Intensity = 5.0f;
+            slight.Attach<DirectLightComponent>().Light.Intensity = 0.0f;
             auto& stp = slight.Attach<TransformComponent>().Transform;
             stp.Rotation = glm::vec3(0.0f, 0.0f, -1.0f);
+
+            // create animated entity
+            auto robot = CreateEntt<Entity>();
+            robot.Attach<ModelComponent>().Model = walking;
+            auto& tr = robot.Attach<TransformComponent>().Transform;
+            tr.Translate = glm::vec3(1.5f, -2.5f, -5.0f);
+            tr.Scale = glm::vec3(0.03f);
+            robot.Attach<AnimatorComponent>().Animator = walking->GetAnimator();
             
-            // create sphere entity
+            /*// create sphere entity
             auto sphere = CreateEntt<Entity>();
             auto& mod = sphere.Attach<ModelComponent>();
             mod.Model = sphereModel;
@@ -67,7 +75,7 @@ namespace Nu
             auto& mod1 = cube.Attach<ModelComponent>();
             mod1.Model = cubeModel;
             mod1.Material.Albedo = glm::vec3(0.1f, 0.0f, 0.5f);
-            cube.Attach<TransformComponent>().Transform.Translate.x = 1.0f;
+            cube.Attach<TransformComponent>().Transform.Translate.x = 1.0f;*/
             
             // generate enviroment maps
             EnttView<Entity, SkyboxComponent>([this, &skymap](auto entity, auto& comp)
@@ -126,7 +134,15 @@ namespace Nu
 
                 // render models
                 EnttView<Entity, ModelComponent>([this] (auto entity, auto& comp) 
-                {      
+                {
+                    // check if has animator and compute key frames
+                    if(entity.Has<AnimatorComponent>())
+                    {
+                        auto& animator = entity.Get<AnimatorComponent>().Animator;
+                        auto& transforms = animator->Animate(0.016666f);
+                        m_Context->Renderer->SetJoints(transforms);
+                    }
+
                     auto& transform = entity.template Get<TransformComponent>().Transform;
                     m_Context->Renderer->Draw(comp.Model, comp.Material, transform);        
                 });
