@@ -4,18 +4,34 @@
 
 namespace Nu
 {
+    // skybox data
+    struct Skybox
+    {
+        NU_INLINE Skybox(const Skybox&) = default;
+        NU_INLINE Skybox() = default;
+        uint32_t PrefilMap = 0u;
+        uint32_t IrradMap = 0u;
+        uint32_t CubeMap = 0u;
+        uint32_t BrdfMap = 0u;
+    };
+
     // pbr material
     struct PbrMaterial 
     {
         NU_INLINE PbrMaterial(const PbrMaterial&) = default;
         NU_INLINE PbrMaterial() = default;
 
+        glm::vec3 Emissive = glm::vec3(0.0f);
         glm::vec3 Albedo = glm::vec3(1.0f);
-        float Roughness = 0.4f;
+
+        float Occlusion = 1.0f;
+        float Roughness = 0.3f;
         float Metallic = 0.5f;
 
+        Texture OcclusionMap;
         Texture RoughnessMap;
         Texture MetallicMap;
+        Texture EmissiveMap;
         Texture NormalMap;
         Texture AlbedoMap;
     };

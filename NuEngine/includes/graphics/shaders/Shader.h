@@ -19,11 +19,13 @@ namespace Nu
         NU_INLINE void Unbind()
         {
             glUseProgram(0);
+            glCheckError();
         }
 
         NU_INLINE void Bind()
         {
             glUseProgram(m_ShaderID);
+            glCheckError();
         }
     private:
         NU_INLINE uint32_t Build(const char* src, uint32_t type)

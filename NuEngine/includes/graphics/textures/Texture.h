@@ -6,19 +6,32 @@
 namespace Nu
 {  
     struct Texture2D 
-    {   
+    {
+        NU_INLINE Texture2D(const std::string& path, bool isHDR, bool flipY)
+        {
+            Load(path, isHDR, flipY);
+        }
+
         NU_INLINE Texture2D(const std::string& path) { Load(path); }
         NU_INLINE ~Texture2D() { glDeleteTextures(1, &m_ID); }
         NU_INLINE Texture2D() = default;
 
-        NU_INLINE bool Load(const std::string& filename) 
+        NU_INLINE bool Load(const std::string& path, bool isHDR = false, bool flipY = true) 
         {
             // flip y axis (common)
-            stbi_set_flip_vertically_on_load(true);
+            stbi_set_flip_vertically_on_load(flipY);
+            void* pixels = nullptr;
 
             // load texture data
-            uint8_t* pixels = stbi_load(filename.c_str(), 
-            &m_Width, &m_Height, nullptr, 4);
+            if (isHDR) 
+            {
+                int32_t channels;
+				pixels = stbi_loadf(path.c_str(), &m_Width, &m_Height, &channels, 0);
+			}
+            else
+            {
+                pixels = stbi_load(path.c_str(), &m_Width, &m_Height, nullptr, 4);
+            }
 
             // check pixels
             if(pixels == nullptr) 
@@ -32,8 +45,14 @@ namespace Nu
             glBindTexture(GL_TEXTURE_2D, m_ID);            
 
             // load texture to gpu
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, 
-            m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);  
+            if (isHDR) 
+            {
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, m_Width, m_Height, 0, GL_RGB, GL_FLOAT, (float*)pixels);
+			}
+			else
+            {
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_Width, m_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (uint32_t*)pixels);
+			}
 
             // free allocated memory
             stbi_image_free(pixels);
@@ -42,11 +61,11 @@ namespace Nu
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-			glGenerateMipmap(GL_TEXTURE_2D);      
+			glGenerateMipmap(GL_TEXTURE_2D);
 
-            glBindTexture(GL_TEXTURE_2D, 0);  
-            return true;     
-        } 
+            glBindTexture(GL_TEXTURE_2D, 0);
+            return true;
+        }
       
         NU_INLINE operator uint32_t() const { return m_ID; }
         NU_INLINE int32_t Height() const { return m_Height; }

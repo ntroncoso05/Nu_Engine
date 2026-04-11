@@ -12,15 +12,17 @@ namespace Nu
             glBindFramebuffer(GL_FRAMEBUFFER, m_BufferID);
 
             CreateColorAttachment();
+            CreateBrightnessAttachment();
             CreateRenderBuffer();
 
             // Attachment Targets
-            uint32_t attachments[1] =
+            uint32_t attachments[2] =
             {
-                GL_COLOR_ATTACHMENT0
+                GL_COLOR_ATTACHMENT0,
+                GL_COLOR_ATTACHMENT1
             };
 
-            glDrawBuffers(1, attachments);
+            glDrawBuffers(2, attachments);
 
             // check frame buffer
             if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -39,11 +41,15 @@ namespace Nu
             m_Width = width;
             m_Height = height;
 
-            // Resize color attachment
+            // Resize color buffer
             glBindTexture(GL_TEXTURE_2D, m_Color);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Width, m_Height, 0, GL_RGBA, GL_FLOAT, NULL);
+
+            // Resize brightness buffer
+            glBindTexture(GL_TEXTURE_2D, m_Brightness);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Width, m_Height, 0, GL_RGBA, GL_FLOAT, NULL);
             
-            // Resize Depth Attachment
+            // Resize Render buffer
             glBindRenderbuffer(GL_RENDERBUFFER, m_Render);
             glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, m_Width, m_Height);
             
@@ -51,6 +57,15 @@ namespace Nu
             glBindTexture(GL_TEXTURE_2D, 0);
             glCheckError();
         }
+
+        NU_INLINE uint32_t GetBrightnessMap()
+        {
+            return m_Brightness;
+        }
+
+        NU_INLINE uint32_t Height() { return m_Height; }
+
+        NU_INLINE uint32_t Width() { return m_Width; }
 
         NU_INLINE uint32_t GetTexture()
         {
@@ -60,6 +75,7 @@ namespace Nu
         NU_INLINE ~FrameBuffer()
         {
             glDeleteTextures(1, &m_Color);
+            glDeleteRenderbuffers(1, &m_Brightness);
             glDeleteRenderbuffers(1, &m_Render);
             glDeleteFramebuffers(1, &m_BufferID);
             glCheckError();
@@ -103,6 +119,18 @@ namespace Nu
             glCheckError();
         }
 
+        NU_INLINE void CreateBrightnessAttachment() 
+        {
+            glGenTextures(1, &m_Brightness);
+            glBindTexture(GL_TEXTURE_2D, m_Brightness);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, m_Width, m_Height, 0, GL_RGBA, GL_FLOAT, NULL);
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, m_Brightness, 0);
+        }
+
         NU_INLINE void CreateRenderBuffer()
         {
             glGenRenderbuffers(1, &m_Render);
@@ -112,6 +140,7 @@ namespace Nu
             glCheckError();
         }
     private:
+        uint32_t m_Brightness = 0u;
         uint32_t m_BufferID = 0u;
         uint32_t m_Render = 0u;
         uint32_t m_Color = 0u;

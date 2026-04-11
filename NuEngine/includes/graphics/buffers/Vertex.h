@@ -16,6 +16,11 @@ namespace Nu
         glm::vec4 Color = glm::vec4(0.0f);
     };
 
+    struct SkyboxVertex
+    {
+        glm::vec3 Position = glm::vec3(0.0f);
+    };
+
     // Shading vertex
     struct ShadedVertex
     {

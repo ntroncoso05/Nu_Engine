@@ -55,9 +55,13 @@ namespace Nu
             {
                 SetAttribute(0, 4, (void*)offsetof(QuadVertex, Data));
             }
+            else if(TypeID<Vertex>() == TypeID<SkyboxVertex>())
+            {
+                SetAttribute(0, 3, (void*)offsetof(SkyboxVertex, Position));
+            }
             else
             {
-                NU_ERROR(false && "Invalid vertex type!");
+                NU_ERROR("Invalid vertex type!");
             }
 
             // unbind vertex array
@@ -67,14 +71,14 @@ namespace Nu
 
         NU_INLINE void Draw(uint32_t mode)
         {
-            glBindVertexArray(m_BufferID);
+            glBindVertexArray(m_BufferID);glCheckError();
             if(m_NbrIndex != 0u)
             {
-                glDrawElements(mode, m_NbrIndex, GL_UNSIGNED_INT, 0);
-                glBindVertexArray(0);
+                glDrawElements(mode, m_NbrIndex, GL_UNSIGNED_INT, 0);glCheckError();
+                glBindVertexArray(0);glCheckError();
                 return;
             }
-            glDrawArrays(mode, 0, m_NbrVertex);
+            glDrawArrays(mode, 0, m_NbrVertex);glCheckError();
             glBindVertexArray(0);
             glCheckError();
         }

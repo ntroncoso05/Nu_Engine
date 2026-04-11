@@ -11,6 +11,14 @@ namespace Nu
 
     // ++
     
+    // skybox component
+    struct SkyboxComponent 
+    {
+        NU_INLINE SkyboxComponent(const SkyboxComponent&) = default;
+        NU_INLINE SkyboxComponent() = default; 
+        Skybox Sky;
+    };
+    
     // direct light component
     struct DirectLightComponent 
     {
