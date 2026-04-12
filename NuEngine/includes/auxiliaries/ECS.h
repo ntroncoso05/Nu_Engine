@@ -1,6 +1,7 @@
 #pragma once
 #include <entt/entt.hpp>
 #include "graphics/utilities/Data.h"
+#include "physics/Utilities.h"
 
 namespace Nu
 {
@@ -10,14 +11,6 @@ namespace Nu
     constexpr EntityID NENTT = entt::null; // null entity
 
     // ++
-    
-    // skybox component
-    struct SkyboxComponent 
-    {
-        NU_INLINE SkyboxComponent(const SkyboxComponent&) = default;
-        NU_INLINE SkyboxComponent() = default; 
-        Skybox Sky;
-    };
     
     // direct light component
     struct DirectLightComponent 
@@ -43,6 +36,14 @@ namespace Nu
         SpotLight Light;
     };
 
+    // rigid body component
+    struct RigidBodyComponent
+    {
+        NU_INLINE RigidBodyComponent(const RigidBodyComponent&) = default;
+        NU_INLINE RigidBodyComponent() = default;
+        RigidBody3D RigidBody;
+    };
+
     // Transform Component
     struct TransformComponent
     {
@@ -51,6 +52,23 @@ namespace Nu
         Transform3D Transform;
     };
 
+    // collider component
+    struct ColliderComponent 
+    {
+        NU_INLINE ColliderComponent(const ColliderComponent&) = default;
+        NU_INLINE ColliderComponent() = default; 
+        Collider3D Collider;
+    }; 
+
+    // model animator
+    struct AnimatorComponent 
+    { 
+        NU_INLINE AnimatorComponent(const AnimatorComponent&) = default;
+        NU_INLINE AnimatorComponent() = default; 
+        Animator3D Animator;
+    };
+
+
     // Camera Component
     struct CameraComponent
     {
@@ -58,13 +76,13 @@ namespace Nu
         NU_INLINE CameraComponent() = default;
         Camera3D Camera;
     };
-
-    // Common Component
-    struct EnttComponent
+    
+    // skybox component
+    struct SkyboxComponent 
     {
-        NU_INLINE EnttComponent(const EnttComponent&) = default;
-        NU_INLINE EnttComponent() = default;
-        std::string Name = "Untitled";
+        NU_INLINE SkyboxComponent(const SkyboxComponent&) = default;
+        NU_INLINE SkyboxComponent() = default; 
+        Skybox Sky;
     };
 
     // model component
@@ -76,14 +94,6 @@ namespace Nu
         Model3D Model; 
     };
 
-    // model animator
-    struct AnimatorComponent 
-    { 
-        NU_INLINE AnimatorComponent(const AnimatorComponent&) = default;
-        NU_INLINE AnimatorComponent() = default; 
-        Animator3D Animator;
-    };
-
     // Mesh Component
     struct MeshComponent
     {
@@ -91,6 +101,14 @@ namespace Nu
         NU_INLINE MeshComponent() = default;
         PbrMaterial Material;
         Mesh3D Mesh;
+    };
+
+    // Common Component
+    struct EnttComponent
+    {
+        NU_INLINE EnttComponent(const EnttComponent&) = default;
+        NU_INLINE EnttComponent() = default;
+        std::string Name = "Untitled";
     };
 
     // base entity
