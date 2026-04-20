@@ -10,7 +10,7 @@ namespace Nu {
 
 	void InitializeCore()
 	{
-		nu::Log::Init();
+		Nu::Log::Init();
 
 		NM_CORE_TRACE("Nu Engine {}", NU_BUILD_ID);
 		NM_CORE_TRACE("Initializing...");

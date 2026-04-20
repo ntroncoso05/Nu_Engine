@@ -2,14 +2,13 @@
 
 #ifdef NM_PLATFORM_WINDOWS
 
-extern Nu::Application* Nu::CreateApplication();
+	extern Nu::Application* Nu::CreateApplication();
 
-int main(int argc, char** argv)
-{
-	Nu::Application* app = Nu::CreateApplication();
-	app->Run();
-	delete app;
-}
-#else
-#error Nu only supports Windows
+	int main(int argc, char** argv)
+	{
+		Nu::Application* app = Nu::CreateApplication();
+		NM_CORE_ASSERT(app, "Client Application is null!");
+		app->Run();
+		delete app;
+	}
 #endif

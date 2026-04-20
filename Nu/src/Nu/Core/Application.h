@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Nu/Core/Core.h"
+#include "Core.h"
+#include "Events/Event.h"
+#include "Window.h"
 
 namespace Nu {
 
@@ -11,8 +13,12 @@ namespace Nu {
 		virtual ~Application();
 
 		void Run();
-	private:
 
+		virtual void OnInit() {}
+		virtual void OnShutdown() {}
+		virtual void OnUpdate() {}
+	private:
+		std::unique_ptr<Window> m_Window;
 	};
 
 	// Implemented by CLIENT

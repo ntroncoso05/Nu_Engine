@@ -9,7 +9,13 @@ workspace "Nu"
         "Dist"
     }
     
-local outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Nu/vendor/GLFW/include"
+
+include "Nu/vendor/GLFW"
 
 project "Nu"
     location "Nu"
@@ -21,27 +27,41 @@ project "Nu"
 
 	files 
 	{ 
-		"%{prj.name}/**.h", 
-		"%{prj.name}/**.c", 
-		"%{prj.name}/**.hpp", 
-		"%{prj.name}/**.cpp" 
+		"%{prj.name}/src/**.h", 
+		"%{prj.name}/src/**.c", 
+		"%{prj.name}/src/**.hpp", 
+		"%{prj.name}/src/**.cpp"  
     }
 
     includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor",
-	}
+        "%{IncludeDir.GLFW}"
+    }
+    
+    links 
+	{ 
+		"GLFW",
+        "opengl32.lib",
+        "dwmapi.lib"
+    }
     
 	filter "system:windows"
 		cppdialect "C++17"
         staticruntime "On"
+        systemversion "latest"
         
 		defines 
 		{ 
             "NM_PLATFORM_WINDOWS",
-            "NU_BUILD_DLL",
+            "NM_BUILD_DLL",
 		}
+
+        postbuildcommands
+        {
+            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+        }
 					
     filter "configurations:Debug"
         defines "NM_DEBUG"
@@ -62,21 +82,22 @@ project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
+    systemversion "latest"
     
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 
-	dependson 
+	links
 	{ 
 		"Nu"
     }
     
 	files 
 	{ 
-		"%{prj.name}/**.h", 
-		"%{prj.name}/**.c", 
-		"%{prj.name}/**.hpp", 
-		"%{prj.name}/**.cpp" 
+		"%{prj.name}/src/**.h", 
+		"%{prj.name}/src/**.c", 
+		"%{prj.name}/src/**.hpp", 
+		"%{prj.name}/src/**.cpp"  
 	}
     
 	includedirs 
@@ -100,11 +121,6 @@ project "Sandbox"
             "NM_PLATFORM_WINDOWS",
 		}
     
-        postbuildcommands
-        {
-            ("{COPY} ../bin/" .. outputdir .. "/Nu/Nu.dll %{cfg.targetdir}")
-        }
-    
     filter "configurations:Debug"
         defines "NM_DEBUG"
         symbols "On"
@@ -118,4 +134,4 @@ project "Sandbox"
         optimize "On"
 
     filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"        
+        buildoptions "/MT"
