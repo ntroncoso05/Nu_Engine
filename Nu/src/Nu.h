@@ -16,9 +16,7 @@
 
 // --- Nu Render API ------------------------------
 #include "Nu/Renderer/Renderer.h"
-#include "Nu/Renderer/FrameBuffer.h"
-#include "Nu/Renderer/VertexBuffer.h"
-#include "Nu/Renderer/IndexBuffer.h"
+#include "Nu/Renderer/Buffer.h"
 #include "Nu/Renderer/Texture.h"
 #include "Nu/Renderer/Shader.h"
 // ---------------------------------------------------

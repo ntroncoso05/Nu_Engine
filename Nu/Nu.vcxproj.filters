@@ -70,10 +70,10 @@
     <ClInclude Include="src\Nu\ImGui\ImGuiLayer.h">
       <Filter>Nu\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.h">
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLBuffer.h">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLIndexBuffer.h">
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLShader.h">
@@ -82,19 +82,16 @@
     <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLTexture.h">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLVertexBuffer.h">
-      <Filter>Nu\Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Nu\Platform\Windows\WindowsInput.h">
       <Filter>Nu\Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Platform\Windows\WindowsWindow.h">
       <Filter>Nu\Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Renderer\Framebuffer.h">
+    <ClInclude Include="src\Nu\Renderer\Buffer.h">
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Renderer\IndexBuffer.h">
+    <ClInclude Include="src\Nu\Renderer\Framebuffer.h">
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Renderer\RenderCommandQueue.h">
@@ -110,9 +107,6 @@
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Renderer\Texture.h">
-      <Filter>Nu\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Nu\Renderer\VertexBuffer.h">
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\nupch.h" />
@@ -142,7 +136,7 @@
     <ClCompile Include="src\Nu\ImGui\ImGuiLayer.cpp">
       <Filter>Nu\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLIndexBuffer.cpp">
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -154,16 +148,13 @@
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLTexture.cpp">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClCompile>
-    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLVertexBuffer.cpp">
-      <Filter>Nu\Platform\OpenGL</Filter>
-    </ClCompile>
     <ClCompile Include="src\Nu\Platform\Windows\WindowsInput.cpp">
       <Filter>Nu\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Nu\Platform\Windows\WindowsWindow.cpp">
       <Filter>Nu\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Nu\Renderer\IndexBuffer.cpp">
+    <ClCompile Include="src\Nu\Renderer\Buffer.cpp">
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Nu\Renderer\RenderCommandQueue.cpp">
@@ -176,9 +167,6 @@
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\Nu\Renderer\Texture.cpp">
-      <Filter>Nu\Renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Nu\Renderer\VertexBuffer.cpp">
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\nupch.cpp" />
