@@ -1,3 +1,10 @@
 [submodule "Nu/vendor/GLFW"]
 	path = Nu/vendor/GLFW
 	url = https://github.com/glfw/glfw
+[submodule "Nu/Vendor/imgui"]
+	path = Nu/Vendor/imgui
+	url = https://github.com/ocornut/imgui
+	branch = docking
+[submodule "Nu/vendor/glm"]
+	path = Nu/vendor/glm
+	url = https://github.com/g-truc/glm

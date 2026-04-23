@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Nu/Core/Core.h"
+#include "Nu/Core/Base.h"
 
 #include "spdlog/spdlog.h"
-#include "spdlog/fmt/bundled/ostream.h"
+#include "spdlog/fmt/ostr.h"
 
 namespace Nu {
 

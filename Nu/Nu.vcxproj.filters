@@ -10,8 +10,20 @@
     <Filter Include="Nu\Core\Events">
       <UniqueIdentifier>{045EC6E5-F02B-BAEB-D9BF-2A12C52C9650}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Nu\ImGui">
+      <UniqueIdentifier>{F25F2819-DE2C-8324-0746-71CCF371B8B2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Nu\Platform">
       <UniqueIdentifier>{1C922B02-8847-A4F7-113C-9ECE7DF09AFB}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nu\Platform\OpenGL">
+      <UniqueIdentifier>{D043C3C8-BC27-841E-2588-7E71118B6EA0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nu\Platform\Windows">
+      <UniqueIdentifier>{56984739-C2F9-2447-4B67-6BF9B7C75B06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Nu\Renderer">
+      <UniqueIdentifier>{6E9908DD-DA4E-81D2-6343-7BA9CFF777D6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -19,7 +31,7 @@
     <ClInclude Include="src\Nu\Core\Application.h">
       <Filter>Nu\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Core\Core.h">
+    <ClInclude Include="src\Nu\Core\Base.h">
       <Filter>Nu\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Core\Events\ApplicationEvent.h">
@@ -34,6 +46,15 @@
     <ClInclude Include="src\Nu\Core\Events\MouseEvent.h">
       <Filter>Nu\Core\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\Nu\Core\Input.h">
+      <Filter>Nu\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Core\Layer.h">
+      <Filter>Nu\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Core\LayerStack.h">
+      <Filter>Nu\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Nu\Core\Log.h">
       <Filter>Nu\Core</Filter>
     </ClInclude>
@@ -46,15 +67,67 @@
     <ClInclude Include="src\Nu\EntryPoint.h">
       <Filter>Nu</Filter>
     </ClInclude>
-    <ClInclude Include="src\Nu\Platform\WindowsWindow.h">
-      <Filter>Nu\Platform</Filter>
+    <ClInclude Include="src\Nu\ImGui\ImGuiLayer.h">
+      <Filter>Nu\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.h">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLIndexBuffer.h">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLShader.h">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLTexture.h">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\OpenGL\OpenGLVertexBuffer.h">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\Windows\WindowsInput.h">
+      <Filter>Nu\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Platform\Windows\WindowsWindow.h">
+      <Filter>Nu\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Framebuffer.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\IndexBuffer.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\RenderCommandQueue.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Renderer.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\RendererAPI.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Shader.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Texture.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\VertexBuffer.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\nupch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Nu\Core\Application.cpp">
       <Filter>Nu\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Nu\Core\Core.cpp">
+    <ClCompile Include="src\Nu\Core\Base.cpp">
+      <Filter>Nu\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Core\Layer.cpp">
+      <Filter>Nu\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Core\LayerStack.cpp">
       <Filter>Nu\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Nu\Core\Log.cpp">
@@ -63,8 +136,56 @@
     <ClCompile Include="src\Nu\Core\Window.cpp">
       <Filter>Nu\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Nu\Platform\WindowsWindow.cpp">
-      <Filter>Nu\Platform</Filter>
+    <ClCompile Include="src\Nu\ImGui\ImGUiBuild.cpp">
+      <Filter>Nu\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="src\Nu\ImGui\ImGuiLayer.cpp">
+      <Filter>Nu\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLIndexBuffer.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLRendererAPI.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLShader.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLTexture.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLVertexBuffer.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\Windows\WindowsInput.cpp">
+      <Filter>Nu\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Nu\Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\IndexBuffer.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\RenderCommandQueue.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Renderer.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Shader.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Texture.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\VertexBuffer.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\nupch.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.cpp‎">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </None>
   </ItemGroup>
 </Project>

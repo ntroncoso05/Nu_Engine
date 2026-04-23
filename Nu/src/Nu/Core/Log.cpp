@@ -1,6 +1,5 @@
+#include "nupch.h"
 #include "Log.h"
-
-#include <memory>
 
 namespace Nu {
 

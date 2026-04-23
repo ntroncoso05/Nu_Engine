@@ -14,16 +14,26 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Nu/vendor/GLFW/include"
+IncludeDir["Glad"] = "Nu/vendor/Glad/include"
+IncludeDir["ImGui"] = "Nu/vendor/ImGui"
+IncludeDir["glm"] = "Nu/vendor/glm"
 
 include "Nu/vendor/GLFW"
+include "Nu/vendor/Glad"
+include "Nu/vendor/ImGui"
 
 project "Nu"
     location "Nu"
-    kind "SharedLib"
+    kind "StaticLib"
     language "C++"
+    cppdialect "C++17"
+    staticruntime "on"
     
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    pchheader "nupch.h"
+    pchsource "Nu/src/nupch.cpp"
 
 	files 
 	{ 
@@ -37,52 +47,48 @@ project "Nu"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor",
-        "%{IncludeDir.GLFW}"
+        "%{IncludeDir.GLFW}",
+        "%{IncludeDir.Glad}",
+        "%{IncludeDir.glm}",
+        "%{IncludeDir.ImGui}"
     }
     
     links 
 	{ 
 		"GLFW",
-        "opengl32.lib",
-        "dwmapi.lib"
+        "Glad",
+        "ImGui",
+        "opengl32.lib"
     }
     
 	filter "system:windows"
-		cppdialect "C++17"
-        staticruntime "On"
         systemversion "latest"
         
 		defines 
 		{ 
             "NM_PLATFORM_WINDOWS",
             "NM_BUILD_DLL",
+            "GLFW_INCLUDE_NONE"
 		}
-
-        postbuildcommands
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-        }
 					
     filter "configurations:Debug"
         defines "NM_DEBUG"
-        symbols "On"
+        symbols "on"
                 
     filter "configurations:Release"
         defines "NM_RELEASE"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "NM_DIST"
-        optimize "On"
-
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+        optimize "on"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "C++"
-    systemversion "latest"
+    cppdialect "C++17"
+    staticruntime "on"
     
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -105,33 +111,25 @@ project "Sandbox"
         "%{prj.name}/src",
         "Nu/src",
         "Nu/vendor",
+        "%{IncludeDir.glm}"
     }
 	
 	filter "system:windows"
-        cppdialect "C++17"
-        staticruntime "On"
-        
-		links 
-		{ 
-			"Nu"
-		}
-        
+        systemversion "latest"
+
 		defines 
 		{ 
-            "NM_PLATFORM_WINDOWS",
+            "NM_PLATFORM_WINDOWS"
 		}
     
     filter "configurations:Debug"
         defines "NM_DEBUG"
-        symbols "On"
+        symbols "on"
                 
     filter "configurations:Release"
         defines "NM_RELEASE"
-        optimize "On"
+        optimize "on"
 
     filter "configurations:Dist"
         defines "NM_DIST"
-        optimize "On"
-
-    filter { "system:windows", "configurations:Release" }
-        buildoptions "/MT"
+        optimize "on"

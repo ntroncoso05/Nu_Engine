@@ -12,6 +12,17 @@
 #include "Nu/Core/Events/KeyEvent.h"
 #include "Nu/Core/Events/MouseEvent.h"
 
-// ---Entry Point------------
+#include "imgui/imgui.h"
+
+// --- Nu Render API ------------------------------
+#include "Nu/Renderer/Renderer.h"
+#include "Nu/Renderer/FrameBuffer.h"
+#include "Nu/Renderer/VertexBuffer.h"
+#include "Nu/Renderer/IndexBuffer.h"
+#include "Nu/Renderer/Texture.h"
+#include "Nu/Renderer/Shader.h"
+// ---------------------------------------------------
+
+// --- Entry Point ------------
 #include "Nu/EntryPoint.h"
-// --------------------------
+// ----------------------------

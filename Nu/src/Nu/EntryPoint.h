@@ -6,9 +6,12 @@
 
 	int main(int argc, char** argv)
 	{
-		Nu::Application* app = Nu::CreateApplication();
-		NM_CORE_ASSERT(app, "Client Application is null!");
-		app->Run();
-		delete app;
+		Nu::InitializeCore();
+			Nu::Application* app = Nu::CreateApplication();
+			NM_CORE_ASSERT(app, "Client Application is null!");
+			app->Run();
+			delete app;
+		Nu::ShutdownCore();
 	}
+
 #endif

@@ -1,9 +1,8 @@
 #pragma once
 
 #include <functional>
-#include <string>
 
-#include "Nu/Core/Core.h"
+#include "Nu/Core/Base.h"
 #include "Nu/Core/Events/Event.h"
 
 namespace Nu {
@@ -39,6 +38,8 @@ namespace Nu {
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
+
+		virtual void* GetNativeWindow() const = 0;
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	protected:
