@@ -8,7 +8,7 @@ workspace "Nu"
         "Release",
         "Dist"
     }
-    
+        
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 -- Include directories relative to root folder (solution directory)
@@ -50,7 +50,9 @@ project "Nu"
         "%{IncludeDir.GLFW}",
         "%{IncludeDir.Glad}",
         "%{IncludeDir.glm}",
-        "%{IncludeDir.ImGui}"
+        "%{IncludeDir.ImGui}",
+        "%{prj.name}/vendor/assimp/include",
+        "%{prj.name}/vendor/stb/include"
     }
     
     links 
@@ -67,8 +69,7 @@ project "Nu"
 		defines 
 		{ 
             "NM_PLATFORM_WINDOWS",
-            "NM_BUILD_DLL",
-            "GLFW_INCLUDE_NONE"
+            "NM_BUILD_DLL", --"GLFW_INCLUDE_NONE"
 		}
 					
     filter "configurations:Debug"
@@ -95,7 +96,8 @@ project "Sandbox"
 
 	links
 	{ 
-		"Nu"
+		"Nu",
+        "Nu/vendor/assimp/win64/assimp.lib"
     }
     
 	files 

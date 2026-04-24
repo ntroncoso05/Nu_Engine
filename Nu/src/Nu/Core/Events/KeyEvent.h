@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Event.h"
+#include "Nu/Core/KeyCodes.h"
 
 #include <sstream>
 

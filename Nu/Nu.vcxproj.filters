@@ -25,6 +25,9 @@
     <Filter Include="Nu\Renderer">
       <UniqueIdentifier>{6E9908DD-DA4E-81D2-6343-7BA9CFF777D6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Nu\vendor">
+      <UniqueIdentifier>{25DAB0A6-9144-651D-DA82-16C3462C4372}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Nu.h" />
@@ -47,6 +50,9 @@
       <Filter>Nu\Core\Events</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Core\Input.h">
+      <Filter>Nu\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Core\KeyCodes.h">
       <Filter>Nu\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Core\Layer.h">
@@ -91,7 +97,13 @@
     <ClInclude Include="src\Nu\Renderer\Buffer.h">
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Camera.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Nu\Renderer\Framebuffer.h">
+      <Filter>Nu\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nu\Renderer\Mesh.h">
       <Filter>Nu\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Nu\Renderer\RenderCommandQueue.h">
@@ -139,6 +151,9 @@
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClCompile>
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.cpp">
+      <Filter>Nu\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>Nu\Platform\OpenGL</Filter>
     </ClCompile>
@@ -157,6 +172,15 @@
     <ClCompile Include="src\Nu\Renderer\Buffer.cpp">
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Camera.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Framebuffer.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Nu\Renderer\Mesh.cpp">
+      <Filter>Nu\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Nu\Renderer\RenderCommandQueue.cpp">
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
@@ -169,11 +193,9 @@
     <ClCompile Include="src\Nu\Renderer\Texture.cpp">
       <Filter>Nu\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\Nu\vendor\stb_image.cpp">
+      <Filter>Nu\vendor</Filter>
+    </ClCompile>
     <ClCompile Include="src\nupch.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.cpp‎">
-      <Filter>Nu\Platform\OpenGL</Filter>
-    </None>
   </ItemGroup>
 </Project>

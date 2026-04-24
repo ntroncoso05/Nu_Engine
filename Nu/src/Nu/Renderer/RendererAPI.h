@@ -2,15 +2,25 @@
 
 namespace Nu {
 
-	using RendererID = unsigned int;
+	using RendererID = uint32_t;
 
-	enum class NU_API RendererAPIType
+	enum class RendererAPIType
 	{
 		None,
 		OpenGL
 	};
 
-	class NU_API RendererAPI
+	struct RenderAPICapabilities
+	{
+		std::string Vendor;
+		std::string Renderer;
+		std::string Version;
+
+		int MaxSamples;
+		float MaxAnisotropy;
+	};
+
+	class RendererAPI
 	{
 	private:
 
@@ -20,6 +30,14 @@ namespace Nu {
 
 		static void Clear(float r, float g, float b, float a);
 		static void SetClearColor(float r, float g, float b, float a);
+
+		static void DrawIndexed(unsigned int count, bool depthTest = true);
+
+		static RenderAPICapabilities& GetCapabilities()
+		{
+			static RenderAPICapabilities capabilities;
+			return capabilities;
+		}
 
 		static void DrawIndexed(unsigned int count);
 

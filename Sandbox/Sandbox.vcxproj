@@ -89,6 +89,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>..\Nu\vendor\assimp\win64\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
     </ProjectReference>
@@ -112,6 +113,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\Nu\vendor\assimp\win64\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
     </ProjectReference>
@@ -135,6 +137,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\Nu\vendor\assimp\win64\assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
     </ProjectReference>

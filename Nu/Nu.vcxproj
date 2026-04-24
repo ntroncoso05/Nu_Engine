@@ -76,8 +76,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>nupch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;GLFW_INCLUDE_NONE;NM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;NM_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;vendor\assimp\include;vendor\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -99,8 +99,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>nupch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;GLFW_INCLUDE_NONE;NM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;NM_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;vendor\assimp\include;vendor\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -126,8 +126,8 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>nupch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;GLFW_INCLUDE_NONE;NM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NM_PLATFORM_WINDOWS;NM_BUILD_DLL;NM_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;vendor;vendor\GLFW\include;vendor\Glad\include;vendor\glm;vendor\ImGui;vendor\assimp\include;vendor\stb\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -157,6 +157,7 @@
     <ClInclude Include="src\Nu\Core\Events\KeyEvent.h" />
     <ClInclude Include="src\Nu\Core\Events\MouseEvent.h" />
     <ClInclude Include="src\Nu\Core\Input.h" />
+    <ClInclude Include="src\Nu\Core\KeyCodes.h" />
     <ClInclude Include="src\Nu\Core\Layer.h" />
     <ClInclude Include="src\Nu\Core\LayerStack.h" />
     <ClInclude Include="src\Nu\Core\Log.h" />
@@ -171,7 +172,9 @@
     <ClInclude Include="src\Nu\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Nu\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Nu\Renderer\Buffer.h" />
+    <ClInclude Include="src\Nu\Renderer\Camera.h" />
     <ClInclude Include="src\Nu\Renderer\Framebuffer.h" />
+    <ClInclude Include="src\Nu\Renderer\Mesh.h" />
     <ClInclude Include="src\Nu\Renderer\RenderCommandQueue.h" />
     <ClInclude Include="src\Nu\Renderer\Renderer.h" />
     <ClInclude Include="src\Nu\Renderer\RendererAPI.h" />
@@ -189,22 +192,24 @@
     <ClCompile Include="src\Nu\ImGui\ImGUiBuild.cpp" />
     <ClCompile Include="src\Nu\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLBuffer.cpp" />
+    <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.cpp" />
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\Nu\Platform\OpenGL\OpenGLTexture.cpp" />
     <ClCompile Include="src\Nu\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Nu\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\Nu\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Nu\Renderer\Camera.cpp" />
+    <ClCompile Include="src\Nu\Renderer\Framebuffer.cpp" />
+    <ClCompile Include="src\Nu\Renderer\Mesh.cpp" />
     <ClCompile Include="src\Nu\Renderer\RenderCommandQueue.cpp" />
     <ClCompile Include="src\Nu\Renderer\Renderer.cpp" />
     <ClCompile Include="src\Nu\Renderer\Shader.cpp" />
     <ClCompile Include="src\Nu\Renderer\Texture.cpp" />
+    <ClCompile Include="src\Nu\vendor\stb_image.cpp" />
     <ClCompile Include="src\nupch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="src\Nu\Platform\OpenGL\OpenGLFramebuffer.cpp‎" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

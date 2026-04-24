@@ -31,11 +31,11 @@ namespace Nu {
 	{		
 	}
 
-	void Renderer::DrawIndexed(unsigned int count)
+	void Renderer::DrawIndexed(unsigned int count, bool depthTest)
 	{
-		NM_RENDER_1(count, {
-			RendererAPI::DrawIndexed(count);
-			});
+		NM_RENDER_2(count, depthTest, {
+			RendererAPI::DrawIndexed(count, depthTest);
+		});
 	}
 
 	void Renderer::WaitAndRender()
